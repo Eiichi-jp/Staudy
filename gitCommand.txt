@@ -1,0 +1,41 @@
+＠ユーザー情報登録
+・git config --global user.name "つけたい名前"
+・git config --global user.email "任意のメールアドレス入力"
+
+＠ユーザー情報確認
+・git config --list
+
+＠現在の改行ルールを確認する
+・git config --show-origin core.autocrlf
+上記結果が「true」ならCRLF(windows向けの設定)
+上記が「false」ならLF(リナックス向けの設定)←基本これがおススメ
+
+＠上記改行ルールをLFに変更する
+・git config --global core.autocrlf false
+
+＠新しいディレクトリ作成
+・git mkdir
+
+＠新しいファイル作成
+・git touch
+
+＠現在までのパスを確認する
+・pwd
+
+＠現在のディレクトリ以下のフォルダ、ファイルを確認する
+・ls
+
+＠新しいリポジトリ作成
+・git init
+リポジトリ(作業場)にしたいフォルダで上記入力(リポジトリにしたフォルダの子フォルダ、子ファイルも対象)。
+このフォルダ以下が作業する場所(ワーキングディレクトリ)になりここで作業をする。
+
+＠githubと関連付けを行う
+・git remote add origin "自分のgithubリポジトリのurl"
+
+＠上記コマンドで登録できなければ以下で登録
+※一度別の登録をしている場合できないらしい…
+・git remote set-url "希望するgithubのurl貼り付け"
+
+＠変更をステージングエリアに上げる(仮登録)
+・git add 
