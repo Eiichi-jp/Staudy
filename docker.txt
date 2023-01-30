@@ -1,0 +1,73 @@
+【dockerのしくみ】
+
+＠dockerの動き
+　①dockerクライアント：コマンド入力されたものを受け取る
+		↓
+　②dockerデーモン(バックグラウンドで作動するアプリ)：①でクライアントから受けた指令をもとにdockerレジストリにdockerイメージを取りに行く
+　※dockerレジストリとは様々なdockerイメージが存在している(mysql、ubuntu、php他にも様々)
+		↓
+　③dockerレジストリから取得してきたdockerイメージをもとにdockerコンテナを作成
+
+例)「docker run hello-world」を実行した場合
+　①dockerクライアントがターミナルから受けた「docker run hello-world」を実行するようにdockerデーモンに指示
+		↓
+　②dockerデーモンが「hello-world」という名前のdockerイメージをdockerレジストリから取得する
+		↓
+　③「hello-world」というdockerイメージからdockerコンテナを作成
+		↓
+　④「hello-world」というdockerコンテナが起動したことにより画面に「Hello from Docker!」と行事がされる
+
+---------------------------------------------
+【Dockerfileの使用方法】
+
+＠dockerコンテナ作成の流れ
+　①アプリコード & Dockerfile作成
+		↓
+　②上記からイメージを作成
+		↓
+　③イメージからdockerコンテナを作成し起動させる
+
+＠dockerイメージの作成コマンド
+　・docker image build -t "希望のタグ名":latest .
+　①docker image build：dockerイメージの作成コマンド
+　②-t "希望のタグ名"：-tオプションで任意のタグ名を命名可能
+　③:latest：バージョン指定latestなので最新版である
+　④語尾の「.」：はディレクトリを指定している「.」の場合は現在のディレクトリのDockerfilを参照するということ
+
+＠dockerイメージの確認コマンド
+　・docker image ls：現在存在しているイメージが一覧表示される
+
+＠dockerの使用可能なコマンドを一覧表示するコマンド
+　・docker --help
+
+＠dockerコンテナの作成、起動コマンド
+　・docker container run -p 8000:8000 --name "希望のコンテナ名" "対象とするdockerイメージのタグ名":latest
+　※docker container run -d -p 8000:8000 --name "希望のコンテナ名" "対象とするdockerイメージのタグ名":latest(-dオプションでバックグラウンドで起動させることも可能)
+　①docker container run：dockerコンテナの作成コマンド
+　②-p 8000:8000：ポート番号を指定している。
+　右側がサーバー側のポート番号(アプリで指定したポート番号)、左が何でもよいがブラウザからアクセスる際のポート番号
+　③--name：作成するコンテナに任意の名前を命名可能
+　④"対象とするdockerイメージのタグ名"：左記通り
+　⑤:latest：④のイメージのバージョンを記載
+
+＠上記コンテナを停止させるには？
+　・ctrl + C もしくは「docker container stop "コンテナ名"」を実行する
+
+＠dockerコンテナを一覧表示するコマンド
+　・docker container ls(起動中のものを表示)
+　・docker container ls　-a(停止しているものも含め全て表示する)
+
+＠dockerコンテナの削除コマンド
+　・docker container rm "対象のコンテナ名"
+
+＠コンテナへのアクセス履歴の確認コマンド
+　・docker container logs "対象のコンテナ名"
+
+＠起動しているコンテナの情報を確認する時のコマンド
+　・docker container exec "対象のコンテナ名" ruby -v
+　対象のコンテナの後に実行したいコマンド等を入力。上記の場合はrubyのバージョンを確認している
+
+＠使っていないイメージやコンテナを削除するコマンド
+　・docker system prune -a
+  -aですべて指定している
+　実行の可否が問われるのでyesで実行

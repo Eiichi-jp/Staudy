@@ -7,6 +7,7 @@ services:
     image: senseshare/php-apache
     ports:
       - 8080:80
+    hostname: 172.25.0.3.
     volumes:
       - ./web:/var/www/html
     restart: always
