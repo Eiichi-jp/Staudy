@@ -3,17 +3,18 @@ version: '3.5'
 services:
 
   php-apache:
-    container_name: sample-shop_php_apache_1
+    container_name: sample-shop_php_apache_2
     image: senseshare/php-apache
     ports:
       - 8080:80
     hostname: 172.25.0.3.
     volumes:
-      - ./web:/var/www/html
+      - ./web:/var/www/html/vue-laravel-spa
     restart: always
+    working_dir: /var/www/html/vue-laravel-spa
 
   mysql:
-    container_name: sample-shop_mysql_1
+    container_name: sample-shop_mysql_2
     image: senseshare/mysql
     volumes:
       - ./mysql:/var/lib/mysql
@@ -22,7 +23,7 @@ services:
     restart: always
 
   phpmyadmin:
-    container_name: sample-shop_phpmyadmin_1
+    container_name: sample-shop_phpmyadmin_2
     image: phpmyadmin/phpmyadmin
     ports:
       - 4040:80
